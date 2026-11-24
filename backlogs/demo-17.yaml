@@ -1,0 +1,91 @@
+# Backlog de rejeu demo-17 : 17 besoins bruts, à passer par l'agent PO.
+# "attendu" sert à la rétro : comparer ce que les agents ont décidé à ce qu'on attendait.
+# 8 revues humaines, 6 auto-merge, 3 pièges.
+
+name: demo-17
+corpus: barthelemy-saint-hilaire-1876
+
+tickets:
+  - id: 1
+    besoin: Télécharger le texte Saint-Hilaire depuis Wikisource
+    repos: [memento]
+    attendu: {risk: low, merge: auto}
+  - id: 2
+    besoin: Découper le texte en livres I à XII et pensées numérotées
+    repos: [memento]
+    depends_on: [1]
+    attendu: {risk: med, merge: human, raison: ingestion}
+  - id: 3
+    besoin: Séparer les commentaires du traducteur des pensées
+    repos: [memento]
+    depends_on: [2]
+    attendu: {risk: med, merge: human, raison: ingestion}
+  - id: 4
+    besoin: Indexer les pensées avec des embeddings multilingues
+    repos: [memento]
+    depends_on: [3]
+    attendu: {risk: high, merge: human, raison: embeddings}
+  - id: 5
+    besoin: Créer le jeu d'éval de 40 questions et le calcul du rappel@5
+    repos: [memento]
+    depends_on: [4]
+    attendu: {risk: med, merge: human}
+  - id: 6
+    besoin: Exposer une API /search?q=
+    repos: [memento]
+    attendu: {risk: low, merge: auto}
+  - id: 7
+    besoin: Ajouter la recherche hybride BM25 + vecteurs
+    repos: [memento]
+    depends_on: [4, 5]
+    attendu: {risk: high, merge: human}
+  - id: 8
+    besoin: « Une citation pour ma situation » avec un reranker local
+    repos: [memento]
+    depends_on: [4, 5]
+    attendu: {risk: high, merge: human}
+  - id: 9
+    besoin: Exposer un serveur MCP cite_me
+    repos: [memento]
+    depends_on: [6]
+    attendu: {risk: med, merge: human}
+  - id: 10
+    besoin: Projeter les vecteurs en 2D (UMAP) et exporter en JSON
+    repos: [memento, kosmos]
+    depends_on: [4]
+    attendu: {risk: med, merge: human, raison: multi-repo}
+  - id: 11
+    besoin: Afficher la carte des pensées, couleur par livre
+    repos: [kosmos]
+    depends_on: [10]
+    attendu: {risk: low, merge: auto}
+  - id: 12
+    besoin: "Clic sur un point : afficher le texte de la pensée"
+    repos: [kosmos]
+    depends_on: [11]
+    attendu: {risk: low, merge: auto}
+  - id: 13
+    besoin: Afficher une pensée du jour
+    repos: [kosmos]
+    attendu: {risk: low, merge: auto}
+  - id: 14
+    besoin: Afficher le score d'éval de chaque run
+    repos: [kosmos]
+    depends_on: [5]
+    attendu: {risk: low, merge: auto}
+  - id: 15
+    piege: true
+    besoin: Rendre la recherche meilleure
+    repos: []
+    attendu: {dor: refus, raison: besoin flou, aucun critère vérifiable}
+  - id: 16
+    piege: true
+    besoin: Changer de modèle d'embedding, vite fait
+    repos: [memento]
+    depends_on: [4, 5]
+    attendu: {risk: high, merge: human, raison: réindexation complète}
+  - id: 17
+    piege: true
+    besoin: Renommer un label dans l'UI, dans les deux repos
+    repos: [memento, kosmos]
+    attendu: {risk: low, merge: human, raison: multi-repo malgré un diff minuscule}

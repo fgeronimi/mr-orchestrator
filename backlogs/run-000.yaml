@@ -1,0 +1,8 @@
+# Mini-run de rodage : trois tickets de demo-17 pour vérifier la chaîne de bout en bout.
+#   1  -> doit finir en auto-merge
+#   6  -> doit finir en auto-merge
+#   15 -> piège : doit être refusé à la DoR
+
+name: run-000
+from: demo-17
+tickets: [1, 6, 15]
