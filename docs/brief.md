@@ -18,15 +18,15 @@ Le test réussit si je pilote des agents comme une équipe : je vois où en est 
 
 ## Construire ou réutiliser
 
-Règle : utiliser tel quel, puis configurer, puis forker. Écrire de zéro en dernier.
+Règle : les skills de Matt qu'on utilise sont forkés dans `mr-orchestrator` sous le préfixe `mro-`, pour les améliorer à chaque rétro et figer leur version entre deux rejeux. Pour un besoin nouveau : forker un équivalent, écrire de zéro en dernier.
 
 | Brique | Choix |
 | --- | --- |
-| Skills des rôles PO, architecte, dev, QA, rétro | Skills de Matt Pocock (voir `README.md`) |
-| Machine à états des tickets | `triage` de Matt, ses rôles pointés sur nos labels `status:*` par `/setup-mr-orchestrator` |
-| Configuration d'un repo projet | `/setup-matt-pocock-skills` puis notre `/setup-mr-orchestrator` (même mécanisme : explorer, proposer, confirmer, écrire `docs/agents/*`) |
-| Arbitre de merge | Notre skill `arbitrate-pr` ; la grille est un script (`grid.py`), pas un modèle. Pas de Claude Ship (offre non éligible). |
-| Mise à jour des forks de skills | Notre skill `sync-skill-forks` (fusion à 3 versions avec `git merge-file`) |
+| Skills des rôles PO, architecte, dev, QA, rétro | Forks `mro-*` des skills de Matt Pocock (voir `README.md`) |
+| Machine à états des tickets | `mro-triage`, ses rôles pointés sur nos labels `status:*` par `/mro-setup` |
+| Configuration d'un repo projet | `/mro-setup-base` puis `/mro-setup` (même mécanisme : explorer, proposer, confirmer, écrire `docs/agents/*`) |
+| Arbitre de merge | Notre skill `mro-arbitrate-pr` ; la grille est un script (`grid.py`), pas un modèle. Pas de Claude Ship (offre non éligible). |
+| Mise à jour des forks de skills | Notre skill `mro-sync-skill-forks` (fusion à 3 versions avec `git merge-file`) |
 | Kanban et agents en parallèle | À tester : kandev. Sinon : labels GitHub + workspaces cmux + nos scripts. |
 | Rejeu de runs | À construire : script de rejeu depuis `baseline-v0` et `backlogs/*.yaml` |
 | Vue des agents dans cmux | À construire : lancement des agents dans des workspaces cmux, hooks Claude Code vers les notifications cmux |
@@ -35,14 +35,14 @@ Règle : utiliser tel quel, puis configurer, puis forker. Écrire de zéro en de
 
 ## Cycle de vie et validations
 
-Référence complète : `skills/setup-mr-orchestrator/templates/workflow.md` (copié dans `docs/agents/workflow.md` de chaque repo projet).
+Référence complète : `skills/mro-setup/templates/workflow.md` (copié dans `docs/agents/workflow.md` de chaque repo projet).
 
 Quatre validations humaines :
 
 1. **DoR** : `status:dor-review` → `status:ready`. Seul l'humain fait ce passage.
 2. **Plan** : `status:plan-review` → `status:dev`.
 3. **PR** : `status:pr-review`, seulement quand l'arbitre a posé `merge:human`.
-4. **Rétro** : synthèse de fin de run (skill `retro` de Matt).
+4. **Rétro** : synthèse de fin de run (skill `mro-retro`).
 
 Gabarit DoR : `.github/ISSUE_TEMPLATE/ticket-dor.md`, tous les champs obligatoires.
 
@@ -65,15 +65,17 @@ Traduction Barthélemy-Saint-Hilaire sur [Wikisource](https://fr.wikisource.org/
 ## Prochaines étapes
 
 1. ✅ Créer les 3 repos, labels et tag `baseline-v0`.
-2. ✅ Écrire nos skills : `setup-mr-orchestrator`, `arbitrate-pr`, `sync-skill-forks`.
-3. Pousser `mr-orchestrator`, puis installer les skills de Matt et les nôtres dans `memento` et `kosmos`, et lancer les deux setups.
-4. Essayer kandev sur `run-000` et décider du socle.
-5. Écrire le script de rejeu et brancher cmux.
-6. Lancer `run-001` sur `demo-17`.
+2. ✅ Écrire nos skills : `mro-setup`, `mro-arbitrate-pr`, `mro-sync-skill-forks`.
+3. ✅ Forker les 15 skills de Matt utilisés (`mro-*`, alignés sur `6f7f783`).
+4. Installer `fgeronimi/mr-orchestrator` dans `memento` et `kosmos` (seule source de skills), commiter, lancer `/mro-setup-base` puis `/mro-setup`.
+5. Essayer kandev sur `run-000` et décider du socle.
+6. Écrire le script de rejeu et brancher cmux.
+7. Lancer `run-001` sur `demo-17`.
 
 ## Questions ouvertes
 
 - Où vivent les tickets multi-repo (10, 17) : dans `memento`, `kosmos`, ou un repo dédié ?
 - Le quota Claude Code tient-il 5 agents en parallèle sur un run complet ?
+- `baseline-v0` ne contient pas les skills : déplacer le tag après l'install, ou faire installer les skills par le script de rejeu ?
 - Seuils de la grille et répartition des modèles : à calibrer au premier run.
 - Source libre pour Épictète, si l'on garde la comparaison.
