@@ -1,23 +1,16 @@
 [project]
 name = "mr-orchestrator"
-version = "0.0.1"
-description = "Orchestrateur d'agents IA pilotés par tickets"
+version = "0.1.0"
+description = "Skills, config et scripts de mon workflow d'agents IA pilotés par tickets"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
-
-[project.scripts]
-mro = "mr_orchestrator.cli:main"
+dependencies = ["pyyaml>=6"]
 
 [dependency-groups]
 dev = ["pytest>=8"]
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/mr_orchestrator"]
+[tool.uv]
+package = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

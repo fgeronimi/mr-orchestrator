@@ -1,0 +1,31 @@
+status:draft	d4d4d8	Brouillon : l'agent PO affine le besoin
+status:dor-review	fbbf24	Validation 1 : la DoR attend ton accord
+status:ready	22c55e	Ready : prêt à être pris par l'orchestrateur
+status:planning	a78bfa	L'agent architecte prépare le plan
+status:plan-review	fbbf24	Validation 2 : le plan attend ton accord
+status:dev	60a5fa	L'agent dev code
+status:qa	38bdf8	L'agent QA vérifie les critères d'acceptation
+status:arbitrage	c084fc	L'agent arbitre décide : auto-merge ou revue humaine
+status:pr-review	fbbf24	Validation 3 : la PR attend ta revue
+status:done	16a34a	Livré
+status:blocked	ef4444	Bloqué : à toi de décider
+agent:po	e9d5ff	Tenu par l'agent PO
+agent:archi	e9d5ff	Tenu par l'agent architecte
+agent:dev	e9d5ff	Tenu par l'agent dev
+agent:qa	e9d5ff	Tenu par l'agent QA
+agent:arbitre	e9d5ff	Tenu par l'agent arbitre
+agent:retro	e9d5ff	Tenu par l'agent rétro
+risk:low	bbf7d0	Risque faible
+risk:med	fde68a	Risque moyen
+risk:high	fecaca	Risque élevé
+merge:auto	86efac	L'arbitre autorise l'auto-merge
+merge:human	fca5a5	L'arbitre demande une revue humaine
+model:opus	cbd5e1	Force Opus pour ce ticket
+model:sonnet	cbd5e1	Force Sonnet pour ce ticket
+model:haiku	cbd5e1	Force Haiku pour ce ticket
+repo:mr-orchestrator	99f6e4	Touche le repo mr-orchestrator
+repo:memento	99f6e4	Touche le repo memento
+repo:kosmos	99f6e4	Touche le repo kosmos
+status:needs-info	fde68a	Il manque une réponse humaine
+status:wontfix	e5e7eb	Abandonné
+human-only	f9a8d4	Travail à ne pas confier à un agent
