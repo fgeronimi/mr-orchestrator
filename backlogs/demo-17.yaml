@@ -1,6 +1,7 @@
-# Backlog de rejeu demo-17 : 17 besoins bruts, à passer par l'agent PO.
-# "attendu" sert à la rétro : comparer ce que les agents ont décidé à ce qu'on attendait.
-# 8 revues humaines, 6 auto-merge, 3 pièges.
+# Backlog demo-17 : 17 besoins bruts, dont 3 pièges.
+# "attendu" sert au journal : comparer ce que les agents ont décidé à ce qu'on attendait.
+# Le champ merge date de l'arbitre abandonné : avec kandev, toutes les PR passent par la revue humaine.
+# Il reste une indication du risque réel du ticket.
 
 name: demo-17
 corpus: barthelemy-saint-hilaire-1876

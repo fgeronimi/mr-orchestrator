@@ -1,8 +1,11 @@
-# Mini-run de rodage : trois tickets de demo-17 pour vérifier la chaîne de bout en bout.
-#   1  -> doit finir en auto-merge
-#   6  -> doit finir en auto-merge
-#   15 -> piège : doit être refusé à la DoR
+# Premier tour du test kandev : trois tickets de demo-17, tous dans memento.
+# Chaque ticket devient une issue memento avec le label kandev, le besoin en titre, corps vide.
+#   1  -> Spec, Work, Review, QA, PR ; mergé après ta revue
+#   6  -> idem, en parallèle du 1 (critère 5)
+#   15 -> piège : doit être arrêté avant Work, par l'agent Spec ou par ta revue (critère 6)
+#        demo-17 ne lui donne aucun repo : on le crée dans memento, là où vit la recherche.
 
 name: run-000
 from: demo-17
 tickets: [1, 6, 15]
+repo: memento
